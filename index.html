@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock. Paper. Scissors.</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/materialize.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+</head>
+
+<body>
+    <nav class="nav purple white-text">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Rock. Paper. Scissors.</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+            </ul>
+        </div>
+    </nav>
+    <!--View On Page Load-->
+    <div class="container" id="loadCont">
+        <div class="row" id="loadRow">
+            <div class="input-field col s12">
+                <select>
+                    <option value="1">Player 1</option>
+                    <option value="2">Player 2</option>
+                </select>
+            </div>
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Username" id="username" type="text" class="validate">
+                    </div>
+                    <label>User Image Upload</label>
+                    <div class="file-field input-field">
+                        <div class="btn black white-text">
+                            <span>Browse</span>
+                            <input type="file" />
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Upload file"
+                                id="userImagePath" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        Give us your best one-liner:
+                        <div class="input-field">
+                            <input id="tagline" type="text" class="validate">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-s12">
+                    <button id="submit" type="submit" class="btn submit-btn black white-text">SUBMIT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--End View on Page Load-->
+    <!--Main Wrap below-->
+    <div id="mainWrap" class="wrapper">
+
+        <!--Player 1-->
+        <div id="p1Cont" class="container">
+            <div class="row">
+
+            </div>
+        </div>
+
+        <!--Player 2-->
+        <div id="p2Cont" class="container">
+            <div class="row">
+
+            </div>
+        </div>
+    </div>
+    <!--Main Wrap above-->
+
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase.js"></script>
+    <script src="assets/javascript/materialize.js"></script>
+    <script src="assets/javascript/main.js"></script>
+</body>
+
+</html>
