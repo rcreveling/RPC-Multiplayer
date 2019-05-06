@@ -21,7 +21,7 @@ $("#submit").one("click", function (event) {
     var tagline = $("#tagline").val().trim()
     var userpick = $(".selected").text();
     console.log(username, userImage, tagline, userpick)
-    database.push({
+    database.ref().push({
         username: username,
         userImage: userImage,
         tagline: tagline,
