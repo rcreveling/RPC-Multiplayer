@@ -20,42 +20,43 @@
     </nav>
     <!--View On Page Load-->
     <div class="container" id="loadCont">
-        <div class="row" id="loadRow">
-            <div class="input-field col s12">
+        <div class="row white-text" id="loadRow">
+            <div class="input-field col s12" id="userPicker">
                 <select>
-                    <option value="1">Player 1</option>
-                    <option value="2">Player 2</option>
+                    <option value="1" class="white-text">Player 1</option>
+                    <option value="2" class="white-text">Player 2</option>
                 </select>
             </div>
             <form class="col s12">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input placeholder="Username" id="username" type="text" class="validate">
+                <div class="row white-text">
+                    <div class="input-field col s5">
+                        <input placeholder="Username" id="username" type="text" class="validate white-text">
                     </div>
-                    <label>User Image Upload</label>
-                    <div class="file-field input-field">
-                        <div class="btn black white-text">
-                            <span>Browse</span>
-                            <input type="file" />
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text" placeholder="Upload file"
-                                id="userImagePath" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s12">
-                        Give us your best one-liner:
+                    <div class="col s5 white-text">
                         <div class="input-field">
-                            <input id="tagline" type="text" class="validate">
+                            <input placeholder="Give us your best one-liner:" id="tagline" type="text" class="validate">
                         </div>
                     </div>
                 </div>
-                <div class="col-s12">
-                    <button id="submit" type="submit" class="btn submit-btn black white-text">SUBMIT</button>
+            </form>
+            <div class="col s6" id="imageUpload">
+                <label>User Image Upload</label>
+                <div class="file-field input-field">
+                    <div class="btn black white-text">
+                        <span>Browse</span>
+                        <input type="file" />
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Upload file" id="userImagePath" />
+                    </div>
                 </div>
+            </div>
+            <div class="col s3 offset-s9">
+                <button id="submit" type="submit" class="btn submit-btn black white-text">SUBMIT</button>
+            </div>
+        </div>
+        <div class="row">
+
             </form>
         </div>
     </div>
