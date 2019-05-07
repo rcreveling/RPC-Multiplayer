@@ -27,3 +27,20 @@ body, html {
 #submit {
     box-shadow: 1px 1px 3px white;
 }
+
+#p1Cont, #p2Cont {
+    width: 25vw;
+    height: 125vh;
+    background-color: grey;
+}
+
+#p1Cont {
+    float: left;
+    box-shadow: .5vw 0vh 2px black;
+
+}
+#p2Cont {
+    float: right;
+    box-shadow: -.5vw 0vh 2px black;
+
+}

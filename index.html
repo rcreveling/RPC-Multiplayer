@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
     <nav class="nav purple white-text">
         <div class="nav-wrapper">
             <a href="#" class="brand-logo center">Rock. Paper. Scissors.</a>
@@ -29,25 +30,27 @@
             </div>
             <form class="col s12">
                 <div class="row white-text">
-                    <div class="input-field col s5">
+                    <div class="input-field col s5 white-text">
                         <input placeholder="Username" id="username" type="text" class="validate white-text">
                     </div>
                     <div class="col s5 white-text">
                         <div class="input-field">
-                            <input placeholder="Give us your best one-liner:" id="tagline" type="text" class="validate">
+                            <input placeholder="Give us your best one-liner:" id="tagline" type="text"
+                                class="validate white-text">
                         </div>
                     </div>
                 </div>
             </form>
             <div class="col s6" id="imageUpload">
                 <label>User Image Upload</label>
-                <div class="file-field input-field">
+                <div class="file-field input-field white-text">
                     <div class="btn black white-text">
                         <span>Browse</span>
                         <input type="file" />
                     </div>
                     <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="Upload file" id="userImagePath" />
+                        <input class="file-path validate white-text" type="text" placeholder="Upload file"
+                            id="userImagePath" />
                     </div>
                 </div>
             </div>
@@ -55,10 +58,8 @@
                 <button id="submit" type="submit" class="btn submit-btn black white-text">SUBMIT</button>
             </div>
         </div>
-        <div class="row">
+        </form>
 
-            </form>
-        </div>
     </div>
     <!--End View on Page Load-->
     <!--Main Wrap below-->
@@ -67,14 +68,18 @@
         <!--Player 1-->
         <div id="p1Cont" class="container">
             <div class="row">
-
+                <div class="col s12">
+                    <h3 id="p1Username"></h3>
+                </div>
             </div>
         </div>
 
         <!--Player 2-->
         <div id="p2Cont" class="container">
             <div class="row">
-
+                <div class="col s12">
+                    <h3 id="p2Username"></h3>
+                </div>
             </div>
         </div>
     </div>
