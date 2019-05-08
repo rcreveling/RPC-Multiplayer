@@ -44,3 +44,10 @@ body, html {
     box-shadow: -.5vw 0vh 2px black;
 
 }
+
+.usernames {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 3em;
+    text-align: center;
+    text-decoration: antiquewhite;
+}
