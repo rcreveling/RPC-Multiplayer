@@ -5,6 +5,7 @@ $(document).ready(function () {
         display: "none"
     })
 });
+
 var icons = ["airport_shuttle", "album", "all_inclusive", "audiotrack", "beach_access", "blur_circular", "border_outer", "brightness_4", "brightness_7", "bubble_chart", "brush", "camera", "color_lens", "code", "details", "directions_bike", "directions_boat", "directions_car", "euro_symbol", "event_seat", "face", "favorite_border", "filter_b_and_w", "filter_hdr", "filter_drama", "filter_vintage", "fingerprint", "flash_on", "fitness_center", "functions", "gesture", "headset", "hourglass_empty", "leak_remove", "lightbulb_outline", "local_bar", "local_dining", "local_florist", "local_pizza", "loyalty", "memory", "map", "monetization_on", "multiline_chart", "motorcycle", "mouse", "pan_tool", "public", "radio", "save", "security"
 ]
 $(".modal-trigger").one("click", function () {
@@ -63,19 +64,6 @@ function reloaded() {
     })
 }
 reloaded();
-var ref = database.ref();
-database.ref().on("child_changed", function (snapshot) {
-    ref = snapshot.getRef()
-
-})
-ref.child("Player 1").on("child_changed", function (p1change) {
-
-    console.log(p1change)
-})
-ref.child("Player 2").on("child_changed", function (p2change) {
-
-    console.log(p2change)
-})
 
 $("#submit").one("click", function (event) {
     event.preventDefault();
@@ -90,6 +78,9 @@ $("#submit").one("click", function (event) {
             userIcon: userIcon,
             tagline: tagline,
             submitted: "true",
+        })
+        database.ref("startgame").set({
+            p1: "soon"
         })
         $("#loadCont").css({
             display: "none",
@@ -108,6 +99,9 @@ $("#submit").one("click", function (event) {
             userIcon: userIcon,
             tagline: tagline2,
             submitted: "true",
+        })
+        database.ref("startgame").set({
+            p2: "soon"
         })
         $("#loadCont").css({
             display: "none",
@@ -129,6 +123,7 @@ function playerSet(identifier) {
     var p2username;
     var p1icon;
     var p2icon;
+
     database.ref("Player 1").on("value", function (p1) {
         p1tagline = p1.val().tagline
         p1submit = p1.val().submitted
@@ -183,14 +178,14 @@ function playerSet(identifier) {
 }
 
 database.ref().on("child_changed", function (snapshot) {
-    var loadOne = database.ref("Reload").val().readyOne
-    var loadTwo = database.ref("Reload").val().readyTwo
-    if (loadOne === "ready" && loadTwo === "ready") {
-        $("#mainWrap").css({
-            display: "block"
-        })
-
-    }
+    // var loadOne = database.ref("Reload").val().readyOne
+    // var loadTwo = database.ref("Reload").val().readyTwo
+    // if (loadOne === "ready" && loadTwo === "ready") {
+    //     $("#mainWrap").css({
+    //         display: "block"
+    //     })
+    //     return console.log("displayed")
+    // }
 })
 
 
@@ -215,9 +210,71 @@ function completed() {
         readyTwo: "",
         readyOne: "",
     })
+    database.ref("startgame").set({
+        p1: "no",
+        p2: "no"
+    })
     console.log("reset done")
 }
 
 $("#resetdata").on("click", function () {
     completed();
 })
+
+$("#readyPlayerOne").on("click", function () {
+    database.ref("startgame").update({
+        p1: "go"
+    }, function (error) {
+        if (error) {
+            console.log("error")
+        } else {
+            var sc = database.ref("startgame/p1")
+        }
+
+    })
+
+    $("#readyPlayerOne").toggleClass("pulse");
+    $("#readyPlayerOne").toggleClass("red");
+    $("#readyPlayerOne").addClass("green")
+    $("#readyPlayerOne").text("Ready")
+})
+
+var startGame1 = database.ref("startgame/p1")
+var startGame2 = database.ref("startgame/p2")
+console.log(startGame1, startGame2)
+
+$("#readyPlayerTwo").one("click", function () {
+    database.ref("startgame").update({
+        p2: "go"
+    }, function (error) {
+        if (error) {
+            console.log("error")
+        } else {
+            var sc = database.ref("startgame")
+
+        }
+
+    })
+
+    $("#readyPlayerTwo").toggleClass("pulse");
+    $("#readyPlayerTwo").toggleClass("red");
+    $("#readyPlayerTwo").addClass("green")
+    $("#readyPlayerTwo").text("Ready")
+})
+var one;
+var two;
+database.ref("startgame").on("value", function (snapshot) {
+    one = snapshot.val().p1
+    two = snapshot.val().p2
+    console.log(one, two)
+    if (one === two && one === "go") {
+        $("#roundCount").css({
+            fontSize: "2em",
+            textAlign: "center",
+            textShadow: "1px 1px 1px black",
+            transition: "2s slide-in"
+        })
+        $("#roundCount").text("Let the Battle Begin")
+    }
+})
+
