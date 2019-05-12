@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Rock. Paper. Scissors.</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
                     <option value="2" class="white-text">Player 2</option>
                 </select>
             </div>
-            <form class="col s12">
+            <form class="col s12 white-text">
                 <div class="row white-text">
                     <div class="input-field col s5 white-text">
                         <input placeholder="Username" id="username" type="text" class="validate white-text">
@@ -41,9 +41,24 @@
                                 class="validate white-text">
                         </div>
                     </div>
+                    <div class="col s12">
+                        <div>
+                            <button data-target="modal1" class="btn black white-text modal-trigger">Icons</button>
+                        </div>
+                        <div id="modal1" class="modal black-text blue">
+                            <div class="modal-content">
+                                <h4>Player Icons</h4>
+                                <p>Pick an icon and Color</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                            </div>
+                        </div>
+                        <label>Select Icon</label>
+                    </div>
                 </div>
             </form>
-            <div class="col s6" id="imageUpload">
+            <!-- <div class="col s6" id="imageUpload">
                 <label>User Image Upload</label>
                 <div class="file-field input-field white-text">
                     <div class="btn black white-text">
@@ -55,7 +70,7 @@
                             id="userImagePath" />
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="col s3 offset-s9">
                 <button id="submit" type="submit" class="btn submit-btn black white-text">SUBMIT</button>
             </div>
@@ -71,7 +86,7 @@
         <div id="p1Cont" class="container">
             <div class="row">
                 <div class="col s12">
-                    <img id="p1image">
+                    <i class="material-icons" id="p1icon"></i>
                 </div>
             </div>
             <div class="row">
@@ -88,7 +103,7 @@
         <div id="p2Cont" class="container">
             <div class="row">
                 <div class="col s12">
-                    <img id="p2image">
+                    <i class="material-icons" id="p2icon"></i>
                 </div>
             </div>
             <div class="row">
@@ -101,6 +116,21 @@
             </div>
         </div>
     </div>
+    <!-- GAME AREA -->
+    <div id="game" class="container">
+        <div class="row">
+
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row">
+
+        </div>
+    </div>>
     <!--Main Wrap above-->
 
     <!-- Added link to the jQuery Library -->

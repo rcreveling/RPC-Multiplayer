@@ -1,9 +1,38 @@
 $(document).ready(function () {
     $('select').formSelect();
+    $('.modal').modal();
     $("#mainWrap").css({
         display: "none"
     })
 });
+var icons = ["airport_shuttle", "album", "all_inclusive", "audiotrack", "beach_access", "blur_circular", "border_outer", "brightness_4", "brightness_7", "bubble_chart", "brush", "camera", "color_lens", "code", "details", "directions_bike", "directions_boat", "directions_car", "euro_symbol", "event_seat", "face", "favorite_border", "filter_b_and_w", "filter_hdr", "filter_drama", "filter_vintage", "fingerprint", "flash_on", "fitness_center", "functions", "gesture", "headset", "hourglass_empty", "leak_remove", "lightbulb_outline", "local_bar", "local_dining", "local_florist", "local_pizza", "loyalty", "memory", "map", "monetization_on", "multiline_chart", "motorcycle", "mouse", "pan_tool", "public", "radio", "save", "security"
+]
+$(".modal-trigger").one("click", function () {
+    for (g = 0; g < icons.length; g++) {
+        var newIcon = $("<button>", { id: "ibtn", class: "material-icons" })
+        newIcon.attr('type', "button");
+        newIcon.attr('onclick', "iconPick($(this).text())")
+        newIcon.text(icons[g])
+        newIcon.css({
+            border: "2px solid black",
+            borderRadius: "10px",
+            fontSize: "2em",
+            padding: "3px 3px 3px 3px",
+            marginTop: "2px",
+        })
+        $(".modal-content").append(newIcon)
+
+    }
+})
+var userIcon;
+function iconPick(icon) {
+    event.preventDefault();
+    userIcon = icon
+    console.log(userIcon)
+
+}
+
+
 var userpick;
 var userpick2;
 
@@ -47,33 +76,18 @@ ref.child("Player 2").on("child_changed", function (p2change) {
 
     console.log(p2change)
 })
-// database.ref("Player 1").on("child_changed", function (snapshot) {
-//     var newName = snapshot.val().username
-//     var newTagline = snapshot.val().tagline
-//     $("#p1tagline").text(newTagline)
-//     $("#p1Username").text(newName)
-// })
-// database.ref("Player 2").on("child_changed", function (snapshot) {
-//     var newName = snapshot.val().username
-//     var newTagline = snapshot.val()
-//     $("#p2tagline").text(newTagline)
-//     $("#p2Username").text(newName)
-// })
 
 $("#submit").one("click", function (event) {
     event.preventDefault();
-    var previousP1
-    var previousP2
-    console.log()
+
     if ($(".selected").text() === "Player 1") {
         var username = $("#username").val().trim();
         var tagline = $("#tagline").val().trim()
-        var userImage = $("#userImagePath").val().trim();
         userpick = $(".selected").text();
-        console.log(username, userImage, tagline, userpick)
+        console.log(username, tagline, userpick, userIcon)
         database.ref("Player 1").set({
             username: username,
-            userImage: userImage,
+            userIcon: userIcon,
             tagline: tagline,
             submitted: "true",
         })
@@ -85,14 +99,13 @@ $("#submit").one("click", function (event) {
     } else {
 
         var username2 = $("#username").val().trim();
-        var tagline2 = $("#tagline").val().trim()
+        var tagline2 = $("#tagline").val().trim();
 
-        var userImage2 = $("#userImagePath").val().trim();
         userpick2 = $(".selected").text();
-        console.log(username2, userImage2, tagline2, userpick2)
+        console.log(username2, tagline2, userpick2, userIcon)
         database.ref("Player 2").set({
             username: username2,
-            userImage: userImage2,
+            userIcon: userIcon,
             tagline: tagline2,
             submitted: "true",
         })
@@ -114,19 +127,19 @@ function playerSet(identifier) {
     var p2tagline;
     var p1username;
     var p2username;
-    var p1image;
-    var p2image;
+    var p1icon;
+    var p2icon;
     database.ref("Player 1").on("value", function (p1) {
         p1tagline = p1.val().tagline
         p1submit = p1.val().submitted
         p1username = p1.val().username
-        p1image = p1.val().userImage
+        p1icon = p1.val().userIcon
     })
     database.ref("Player 2").on("value", function (p2) {
         p2tagline = p2.val().tagline
         p2submit = p2.val().submitted
         p2username = p2.val().username
-        p2image = p2.val().userImage
+        p2icon = p2.val().userIcon
     })
     console.log(p1submit, p2submit)
     if (p1submit === "true" && p2submit === "true") {
@@ -134,8 +147,9 @@ function playerSet(identifier) {
         $("#p2tagline").text('"' + p2tagline + '"')
         $("#p1username").text(p1username)
         $("#p2username").text(p2username)
-        $("#p1image").attr('src', p1image)
-        $("#p2image").attr('src', p2image)
+        $("#p1icon").text(p1icon)
+        $("#p2icon").text(p2icon)
+
         $("h5").css({
             fontFamily: "Georgia, serif",
             fontSize: "1.5em",
@@ -158,7 +172,18 @@ function playerSet(identifier) {
             console.log(snapshot.val())
         })
     }
+
 }
+
+database.ref().on("child_changed", function (snapshot) {
+    var loadOne = database.ref("Reload").val().readyOne
+    var loadTwo = database.ref("Reload").val().readyTwo
+    if (loadOne === "ready" && loadTwo === "ready") {
+        $("#mainWrap").css({
+            display: "block"
+        })
+    }
+})
 
 
 function completed() {

@@ -3,7 +3,7 @@ background-image: url("../images/diagonal-squares.png") !important;
 background-size: repeat;
 }
 
-body, html {
+body {
     background-image: url("../images/circuit.png");
 }
 
@@ -50,4 +50,15 @@ body, html {
     font-size: 3em;
     text-align: center;
     text-decoration: antiquewhite;
+}
+
+.modal-content>.material-icons {
+    cursor: pointer;
+}
+
+#p1icon, #p2icon {
+   padding: 0 0 0 5vw !important;
+    font-size: 15em;
+    color: black;
+    text-shadow: 1px 1px 3px white;
 }
