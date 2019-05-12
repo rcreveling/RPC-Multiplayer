@@ -62,3 +62,15 @@ body {
     color: black;
     text-shadow: 1px 1px 3px white;
 }
+
+#game {
+    display: none;
+    position: absolute;
+    top: 20vh;
+    left: 27.5vw;
+    width: 45vw;
+    height: 45vh;
+    border-radius: 15px;
+    border: solid 2px black;
+    background-image: url("../images/circuit.png")
+}

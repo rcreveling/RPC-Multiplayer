@@ -158,6 +158,12 @@ function playerSet(identifier) {
         $("#mainWrap").css({
             display: "block"
         })
+        $("#game").css({
+            display: "block"
+        })
+        $("body").css({
+            backgroundImage: 'url("assets/images/blue-berries-lemon-pattern-large.jpg")'
+        })
         if (identifier === "Player 1") {
             database.ref("Reload").set({
                 readyOne: "ready"
@@ -182,6 +188,7 @@ database.ref().on("child_changed", function (snapshot) {
         $("#mainWrap").css({
             display: "block"
         })
+
     }
 })
 
