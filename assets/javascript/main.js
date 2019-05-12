@@ -162,7 +162,8 @@ function playerSet(identifier) {
             display: "block"
         })
         $("body").css({
-            backgroundImage: 'url("assets/images/blue-berries-lemon-pattern-large.jpg")'
+            backgroundImage: 'url("assets/images/background-pattern-for-daily-ui-059-large.png")',
+            backgroundSize: "cover"
         })
         if (identifier === "Player 1") {
             database.ref("Reload").set({

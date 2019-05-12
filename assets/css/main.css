@@ -72,5 +72,19 @@ body {
     height: 45vh;
     border-radius: 15px;
     border: solid 2px black;
-    background-image: url("../images/circuit.png")
+    background-image: url("../images/daily-ui-059-background-pattern-large.png")
+}
+
+.pick {
+    position: relative; 
+    padding: 0 auto !important;
+    width: 7vw !important;
+    height: 7vh !important;
+}
+
+.rpsicons {
+    height: 6vh !important;
+    width: 6vw !important;
+    padding-top: 1vh !important;
+    padding-right: 1vw !important;
 }
