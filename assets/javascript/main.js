@@ -4,6 +4,7 @@ $(document).ready(function () {
     $("#mainWrap").css({
         display: "none"
     })
+
 });
 
 var icons = ["airport_shuttle", "album", "all_inclusive", "audiotrack", "beach_access", "blur_circular", "border_outer", "brightness_4", "brightness_7", "bubble_chart", "brush", "camera", "color_lens", "code", "details", "directions_bike", "directions_boat", "directions_car", "euro_symbol", "event_seat", "face", "favorite_border", "filter_b_and_w", "filter_hdr", "filter_drama", "filter_vintage", "fingerprint", "flash_on", "fitness_center", "functions", "gesture", "headset", "hourglass_empty", "leak_remove", "lightbulb_outline", "local_bar", "local_dining", "local_florist", "local_pizza", "loyalty", "memory", "map", "monetization_on", "multiline_chart", "motorcycle", "mouse", "pan_tool", "public", "radio", "save", "security"
@@ -51,23 +52,56 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
-function reloaded() {
-    database.ref("Player 1").once("value", function (snapshot) {
-        var usernameOne = snapshot.val().username
-        console.log(usernameOne)
-        $("#p1Username").text(usernameOne)
-    })
-    database.ref("Player 2").once("value", function (snapshot) {
-        var usernameTwo = snapshot.val().username
-        console.log(usernameTwo)
-        $("#p2Username").text(usernameTwo)
-    })
+// CHECK IF USER IS CURRENTLY IN DATABASE/SET THEIR IDENTITY //
+var localUser = "";
+var usercheck = localStorage.getItem('currentUser')
+var users = [database.ref("Player 1").username, database.ref("Player 2").username]
+if (usercheck === users[0]) {
+    reloaded("one");
+    localUser = "Player 1"
+} if (usercheck === users[1]) {
+    reloaded("two")
+    localuser = "Player 2"
 }
-reloaded();
 
+function reloaded(a) {
+    switch (a) {
+        case "one":
+            database.ref("Player 1").once("value", function (snapshot) {
+                var usernameOne = snapshot.val().username
+                var taglineOne = snapshot.val().tagline
+                var iconOne = snapshot.val().userIcon
+                console.log(usernameOne)
+                $("#p1Username").text(usernameOne)
+                $("#p1tagline").text(taglineOne)
+                $("#p1icon").text(iconOne)
+                database.ref("Player 1").set({
+                    submitted: "true",
+                })
+            })
+            break;
+        case "two":
+            database.ref("Player 2").once("value", function (snapshot) {
+                var usernameTwo = snapshot.val().username
+                var taglineTwo = snapshot.val().tagline
+                var iconTwo = snapshot.val().userIcon
+                console.log(usernameTwo)
+                $("#p2Username").text(usernameTwo)
+                $("#p2tagline").text(taglineTwo)
+                $("#p2icon").text(iconTwo)
+                database.ref("Player 2").set({
+                    submitted: "true",
+                })
+            })
+            break;
+    }
+}
+
+var currentUser;
+var mystorage = window.localStorage;
 $("#submit").one("click", function (event) {
     event.preventDefault();
-
+    currentUser = $("#username").val().trim()
     if ($(".selected").text() === "Player 1") {
         var username = $("#username").val().trim();
         var tagline = $("#tagline").val().trim()
@@ -110,6 +144,7 @@ $("#submit").one("click", function (event) {
         $("#p2Username").text(username2)
     }
     var identifier = $(".selected").text()
+    mystorage.setItem('currentUser', currentUser)
     playerSet(identifier);
 })
 
@@ -214,6 +249,11 @@ function completed() {
         p1: "no",
         p2: "no"
     })
+    database.ref("game").set({
+        p1: "",
+        p2: "",
+        round: 0
+    })
     console.log("reset done")
 }
 
@@ -263,6 +303,67 @@ $("#readyPlayerTwo").one("click", function () {
 })
 var one;
 var two;
+function beginGame() {
+    database.ref("game").set({
+        round: 1,
+        p1: "",
+        p2: ""
+    })
+    $("button").on("click", $("#rpsicons"), function () {
+        var a = $(this).attr('id')
+        var ref = database.ref("game")
+        console.log(a, ref)
+        switch (a) {
+            case "rock1":
+                ref.update({
+                    p1: "rock"
+                })
+                console.log(database.ref("game"))
+                break;
+
+            case "rock2":
+                ref.update({
+                    p2: "rock"
+                })
+                break;
+
+            case "paper1":
+                ref.update({
+                    p1: "paper"
+                })
+                break;
+
+            case "paper2":
+                ref.update({
+                    p2: "paper"
+                })
+                break;
+
+            case "scissors1":
+                ref.update({
+                    p1: "scissors"
+                })
+                break;
+
+            case "scissors2":
+                ref.update({
+                    p2: "scissors"
+                })
+                break;
+        }
+        var p1c = database.ref("game/p1")
+        var p2c = database.ref("game/p2")
+        console.log(p1c, p2c)
+    })
+}
+function startUp() {
+    $("#roundCount").text("Round One")
+    database.ref("game").set({
+        p1: "",
+        p2: "",
+        round: 1,
+    })
+}
 database.ref("startgame").on("value", function (snapshot) {
     one = snapshot.val().p1
     two = snapshot.val().p2
@@ -275,6 +376,35 @@ database.ref("startgame").on("value", function (snapshot) {
             transition: "2s slide-in"
         })
         $("#roundCount").text("Let the Battle Begin")
+        beginGame();
     }
 })
 
+database.ref("game").on("child_changed", function (snapshot) {
+    var p1pick = database.ref("game").p1
+    var p2pick = database.ref("game").p2
+
+    switch (p1pick) {
+        case "rock":
+            $("#rock1").toggleClass("pulsing")
+            break;
+        case "paper":
+            $("#paper1").toggleClass("pulsing")
+            break;
+        case "scissors":
+            $("#scissors1").toggleClass("pulsing")
+            break;
+    }
+    switch (p2pick) {
+        case "rock":
+            $("#rock2").toggleClass("pulsing")
+            break;
+        case "paper":
+            $("#paper2").toggleClass("pulsing")
+            break;
+        case "scissors":
+            $("#scissors2").toggleClass("pulsing")
+            break;
+    }
+    console.log("p2pick")
+})

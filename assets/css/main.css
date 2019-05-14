@@ -93,3 +93,43 @@ body {
     text-align: center;
     margin: 5vh 0 0 10vw !important;
 }
+
+.pulsing {
+    -webkit-animation: pulser 5s infinite; /* Safari 4+ */
+    -moz-animation:    pulser 5s infinite; /* Fx 5+ */
+    -o-animation:      pulser 5s infinite; /* Opera 12+ */
+    animation:         pulser 5s infinite; /* IE 10+, Fx 29+ */
+}
+
+@-webkit-keyframes pulser {
+    0%, 100%   { 
+        opacity: 0.6;
+        background-color: white
+     }
+    50% { opacity: 1;
+            background-color: red }
+  }
+  @-moz-keyframes pulser {
+    0%, 100%   { 
+        opacity: 0.6;
+        background-color: white
+     }
+    50% { opacity: 1;
+            background-color: red }
+  }
+  @-o-keyframes pulser {
+    0%, 100%   { 
+        opacity: 0.6;
+        background-color: white
+     }
+    50% { opacity: 1;
+            background-color: red }
+  }
+  @keyframes pulser {
+    0%, 100%   { 
+        opacity: 0.6;
+        background-color: white
+     }
+    50% { opacity: 1;
+            background-color: red }
+  }
