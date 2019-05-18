@@ -1,37 +1,43 @@
 .nav-wrapper {
-background-image: url("../images/diagonal-squares.png") !important;
+background-image: url("../images/4k-wallpaper-architecture-background-1308624.jpg") !important;
 background-size: repeat;
 }
 
 body {
-    background-image: url("../images/circuit.png");
+    background-image: url("../images/antique-backdrop-background-129731.jpg");
 }
 
 #loadCont {
     margin-top: 1vh !important;
-    background: radial-gradient(circle at 100%, #333, #333 50%, #eee 75%, #333 75%);
+    background: radial-gradient(circle at 100%, rgba(145, 2, 2, 0.6), rgb(122, 42, 42) 50%, rgb(214, 132, 24) 75%, rgba(255, 255, 255, 0.9) 80%, rgba(129, 42, 7, 0.8) 75%);
     border-radius: 15px;
     border: 1px black solid;
-    box-shadow: .5vw 1vh 3px black;
+    box-shadow: .5vw 1vh 3px rgb(61, 13, 13);
 }
 
 #userPicker {
     box-sizing: inherit;
-    background: linear-gradient(to right, white 0%, rgba(200, 200, 200, 0.7) 30%, rgba(100, 100, 100, 0.7) 80%);
+    background: linear-gradient(to right, white 0%, rgba(199, 108, 23, 0.7) 30%, rgba(65, 20, 0, 0.7) 50%, rgba(145, 2, 2, 0.6));
     border-radius: 5px;
 }
 #imageUpload {
     padding: 0px 1vw 0px 1vw;
 }
 
-#submit {
-    box-shadow: 1px 1px 3px white;
+#submit, #iconsBtn  {
+    box-shadow: 0px 0px 4px white;
+    background-color: rgba(231, 147, 38, 0.822) !important;
+    color: rgba(150, 17, 0, 0.884) !important;
+}
+#resetdata {
+    box-shadow: 0px 0px 4px white;
+background-color: rgba(8, 0, 78, 0.884) !important;
 }
 
 #p1Cont, #p2Cont {
     width: 25vw;
     height: 125vh;
-    background-color: grey;
+    background-color: rgba(200, 200, 200, 0.6);
 }
 
 #p1Cont {

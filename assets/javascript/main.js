@@ -123,15 +123,15 @@ $("#submit").one("click", function (event) {
         $("#p1Username").text(username)
     } else {
 
-        var username2 = $("#username").val().trim();
-        var tagline2 = $("#tagline").val().trim();
+        var username = $("#username").val().trim();
+        var tagline = $("#tagline").val().trim();
 
         userpick2 = $(".selected").text();
-        console.log(username2, tagline2, userpick2, userIcon)
+        console.log(username, tagline, userpick2, userIcon)
         database.ref("Player 2").set({
-            username: username2,
+            username: username,
             userIcon: userIcon,
-            tagline: tagline2,
+            tagline: tagline,
             submitted: "true",
         })
         database.ref("startgame").set({
@@ -141,10 +141,9 @@ $("#submit").one("click", function (event) {
             display: "none",
         })
 
-        $("#p2Username").text(username2)
+        $("#p2Username").text(username)
     }
     var identifier = $(".selected").text()
-    mystorage.setItem('currentUser', currentUser)
     playerSet(identifier);
 })
 
@@ -192,7 +191,7 @@ function playerSet(identifier) {
             display: "block"
         })
         $("body").css({
-            backgroundImage: 'url("assets/images/background-pattern-for-daily-ui-059-large.png")',
+            backgroundImage: 'url("assets/images/arch-bridge-clouds-814499.jpg")',
             backgroundSize: "cover"
         })
         if (identifier === "Player 1") {
@@ -380,31 +379,37 @@ database.ref("startgame").on("value", function (snapshot) {
     }
 })
 
-database.ref("game").on("child_changed", function (snapshot) {
-    var p1pick = database.ref("game").p1
-    var p2pick = database.ref("game").p2
 
-    switch (p1pick) {
-        case "rock":
-            $("#rock1").toggleClass("pulsing")
+var lastButtonPressed;
+$(".pick").on("click", function (event) {
+    var highlight = $(this).attr('id')
+    var thisButton = event.currentTarget
+    if (lastButtonPressed !== thisButton) {
+
+        $(lastButtonPressed).removeClass("red").addClass("white")
+    }
+    $(thisButton).removeClass("white").addClass("red")
+    lastButtonPressed = thisButton;
+    console.log(lastButtonPressed)
+
+
+
+    switch (highlight) {
+        case rock1:
+        case paper1:
+        case scissors1:
+            database.ref("game").update({
+                p1: highlight,
+            })
             break;
-        case "paper":
-            $("#paper1").toggleClass("pulsing")
-            break;
-        case "scissors":
-            $("#scissors1").toggleClass("pulsing")
+        case rock2:
+        case paper2:
+        case scissors2:
+            database.ref("game").update({
+                p2: highlight,
+            })
             break;
     }
-    switch (p2pick) {
-        case "rock":
-            $("#rock2").toggleClass("pulsing")
-            break;
-        case "paper":
-            $("#paper2").toggleClass("pulsing")
-            break;
-        case "scissors":
-            $("#scissors2").toggleClass("pulsing")
-            break;
-    }
-    console.log("p2pick")
+
+
 })
